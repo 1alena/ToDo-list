@@ -22,8 +22,8 @@ export default {
 
 <style>
   body{
-    //background-image: url("/home/dev/WebstormProjects/todolist/src/assets/example.jpg");
     background: linear-gradient(to bottom right , #aea4e3, #d3ffe8);
+
   }
 
   #app {
@@ -35,12 +35,12 @@ export default {
   }
 
   .box {
-    margin: 100px 300px;
+    margin: 140px 300px;
     border: 5px black;
     background-color: rgba(255, 255, 255, 0.6);
     height: 700px;
     align-items: flex-end;
-    box-shadow: 10px 10px 5px white;
+    box-shadow: 10px 10px 5px rgba(85, 105, 115);
     border-radius: 5px;
   }
 

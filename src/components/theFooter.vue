@@ -42,7 +42,7 @@ export default {
   }
 
   button{
-    padding: 0 10px 0 0;
+    padding: 0 15px 0 0;
     margin: 40px;
     display: flex;
     align-items: center;
