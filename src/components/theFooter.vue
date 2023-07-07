@@ -12,17 +12,22 @@
 export default {
   name: 'theFooter',
   props: {
+    tasksLength: {type: Number}
   },
 
   data() {
     return {
-      taskCounter: 0
+      taskCounter: this.tasksLength,
+      taskText: ''
     }
   },
 
   methods: {
     addNewTask(){
+      // taskText =
+      this.taskCounter++
 
+      this.$emit('taskText', this.taskText)
     },
   }
 }

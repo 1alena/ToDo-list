@@ -2,10 +2,11 @@
   <div class="list">
     <ul id="list">
       <li v-for="task in tasks" :key="task.message" >
-        <div>
+        <div v-if="task.addFlag===false">
           <input type="checkbox" id="checkbox">
           <label for="checkbox">{{ task.message }}</label>
         </div>
+        <input v-else @keypress.enter="task.addFlag = false" type="text" placeholder="Your task" v-model="task.message">
         <div>
           <button v-on:click="editTask">
             <img src="../assets/edit.png" alt="edit">
@@ -14,9 +15,25 @@
             <img src="../assets/cross.png" alt="delete">
           </button>
         </div>
+
+<!--        <div v-if="addFlag=true">-->
+<!--          <div>-->
+<!--            <input type="checkbox" id="checkbox">-->
+<!--            <input type="text" placeholder="Your task" v-model="task.message">-->
+<!--            <label for="checkbox">{{ task.message }}</label>-->
+<!--          </div>-->
+<!--          <div>-->
+<!--            <button v-on:click="editTask">-->
+<!--              <img src="../assets/edit.png" alt="edit">-->
+<!--            </button>-->
+<!--            <button v-on:click="deleteTask">-->
+<!--              <img src="../assets/cross.png" alt="delete">-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
       </li>
     </ul>
-    <theFooter />
+    <theFooter :tasksLength = 'tasks.length' @taskText = 'taskText'/>
   </div>
 </template>
 
@@ -31,11 +48,11 @@ export default {
   data() {
     return {
       tasks: [
-        {message: 'Go for a walk'},
-        {message: 'Buy flowers for my mom'},
-        {message: 'Buy cheese'},
-        {message: 'Pick up documents'},
-        {message: 'Wash the dishes'}
+        {message: 'Go for a walk', addFlag: false},
+        {message: 'Buy flowers for my mom', addFlag: false},
+        {message: 'Buy cheese', addFlag: false},
+        {message: 'Pick up documents', addFlag: false},
+        {message: 'Wash the dishes', addFlag: false}
       ]
     }
   },
@@ -45,7 +62,12 @@ export default {
 
     deleteTask() {},
 
-    editTask() {}
+    editTask() {},
+
+    taskText(taskText){
+      this.tasks.push({message: taskText, addFlag: true})
+    }
+
   },
 }
 </script>
