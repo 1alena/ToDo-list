@@ -1,4 +1,6 @@
-# todolist
+## ToDo-list
+
+С использованием фреймворка Vue.
 
 ## Project setup
 ```
