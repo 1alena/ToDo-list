@@ -1,28 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="box">
+      <theHeader msg="Monday"/>
+      <ListWithTasks />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import theHeader from './components/theHeader.vue'
+import ListWithTasks from './components/ListWithTasks.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    theHeader,
+    ListWithTasks,
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body{
+    //background-image: url("/home/dev/WebstormProjects/todolist/src/assets/example.jpg");
+    background: linear-gradient(to bottom right , #aea4e3, #d3ffe8);
+  }
+
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+  }
+
+  .box {
+    margin: 100px 300px;
+    border: 5px black;
+    background-color: rgba(255, 255, 255, 0.6);
+    height: 700px;
+    align-items: flex-end;
+    box-shadow: 10px 10px 5px white;
+    border-radius: 5px;
+  }
+
 </style>
