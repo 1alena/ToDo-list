@@ -18,16 +18,16 @@ export default {
   data() {
     return {
       taskCounter: this.tasksLength,
-      taskText: ''
+      taskText: '',
+      addFlag: true
     }
   },
 
   methods: {
     addNewTask(){
-      // taskText =
       this.taskCounter++
 
-      this.$emit('taskText', this.taskText)
+      this.$emit('addNewFolder')
     },
   }
 }

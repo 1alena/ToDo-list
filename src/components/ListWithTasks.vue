@@ -1,59 +1,52 @@
 <template>
   <div class="list">
     <ul id="list">
-      <li v-for="task in tasks" :key="task.message" >
-        <div v-if="task.addFlag===false">
+      <li v-for="(task, index) in tasks" :key="index">
+        <div>
           <input type="checkbox" id="checkbox">
           <label for="checkbox">{{ task.message }}</label>
         </div>
-        <input v-else @keypress.enter="task.addFlag = false" type="text" placeholder="Your task" v-model="task.message">
+        <!--<input v-else @keypress.enter="task.addFlag = false" type="text" placeholder="Your task" v-model="task.message">-->
         <div>
           <button v-on:click="editTask">
-            <img src="../assets/edit.png" alt="edit">
+            <img src="../assets/edit.png" alt="edit" >
           </button>
           <button v-on:click="deleteTask">
             <img src="../assets/cross.png" alt="delete">
           </button>
         </div>
-
-<!--        <div v-if="addFlag=true">-->
-<!--          <div>-->
-<!--            <input type="checkbox" id="checkbox">-->
-<!--            <input type="text" placeholder="Your task" v-model="task.message">-->
-<!--            <label for="checkbox">{{ task.message }}</label>-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <button v-on:click="editTask">-->
-<!--              <img src="../assets/edit.png" alt="edit">-->
-<!--            </button>-->
-<!--            <button v-on:click="deleteTask">-->
-<!--              <img src="../assets/cross.png" alt="delete">-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
       </li>
     </ul>
-    <theFooter :tasksLength = 'tasks.length' @taskText = 'taskText'/>
+    <div v-show="!addFlag">
+      <theInput @taskText="taskText" @keypress.enter="taskText" class="input"/>
+    </div>
+    <theFooter :tasksLength = 'tasks.length' @addNewFolder="addNewFolder"/>
   </div>
 </template>
 
 <script>
 import theFooter from "@/components/theFooter.vue";
+import theInput from "@/components/theInput.vue";
 
 export default {
   name: 'ListWithTasks',
-  components: {theFooter},
+  components: {
+    theFooter,
+    theInput
+  },
   props: {},
 
   data() {
     return {
       tasks: [
-        {message: 'Go for a walk', addFlag: false},
-        {message: 'Buy flowers for my mom', addFlag: false},
-        {message: 'Buy cheese', addFlag: false},
-        {message: 'Pick up documents', addFlag: false},
-        {message: 'Wash the dishes', addFlag: false}
-      ]
+        {message: 'Go for a walk'},
+        {message: 'Buy flowers for my mom'},
+        {message: 'Buy cheese'},
+        {message: 'Pick up documents'},
+        {message: 'Wash the dishes'}
+      ],
+
+      addFlag: true
     }
   },
 
@@ -64,8 +57,14 @@ export default {
 
     editTask() {},
 
+    addNewFolder(){
+      this.addFlag = false
+
+    },
+
     taskText(taskText){
-      this.tasks.push({message: taskText, addFlag: true})
+      this.tasks.push({message: taskText})
+      this.addFlag = true
     }
 
   },
@@ -75,6 +74,26 @@ export default {
 <style scoped>
   .list {
     text-align: left;
+    margin-left: 0;
+  }
+
+  ul{
+    max-height: 360px;
+    overflow-y: scroll;
+  }
+
+  ::-webkit-scrollbar {
+    width: 30px;/* ширина всей полосы прокрутки */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: orange;/* цвет зоны отслеживания */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: blue;/* цвет бегунка */
+    border-radius: 20px;/* округлось бегунка */
+    border: 3px solid orange;/* отступ вокруг бегунка */
   }
 
   li {
@@ -102,11 +121,6 @@ export default {
   img{
     height: 15px;
     width: 15px;
-  }
-
-  input{
-    margin: auto 5px ;
-    border-radius: 50px;
   }
 
   input:checked{
