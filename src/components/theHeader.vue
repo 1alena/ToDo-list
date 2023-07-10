@@ -1,12 +1,12 @@
 <template>
   <div class="header">
-    <a v-on:click="toBack">
+    <!--<a v-on:click="toBack">
       <img src="../assets/toBack.png" alt="to back" >
-    </a>
+    </a>-->
     <h1>{{ msg }}</h1>
-    <a v-on:click="toForward">
+    <!--<a v-on:click="toForward">
       <img src="../assets/toForward.png" alt="to forward">
-    </a>
+    </a>-->
   </div>
 </template>
 
@@ -18,7 +18,7 @@ export default {
 
   data() {
     return {
-      msg: 'Monday'
+      msg: 'Your tasks'
     }
   },
 
@@ -32,9 +32,11 @@ export default {
 
 <style scoped>
   .header{
+    padding-top: 30px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    //justify-content: space-between;
+    justify-content: center;
+    //align-items: center;
   }
 
   a{

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="box">
-      <theHeader msg="Monday"/>
+      <theHeader msg="Your tasks"/>
       <ListWithTasks />
     </div>
   </div>

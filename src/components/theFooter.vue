@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <p>You have {{taskCounter}} tasks for this day!</p>
+    <p>{{ changeFinishText }}</p>
     <button v-on:click="addNewTask">
       <img src="../assets/plus.png" alt="plus">
       Add a new task
@@ -12,25 +12,33 @@
 export default {
   name: 'theFooter',
   props: {
-    tasksLength: {type: Number}
+    taskCounter: {type: Number}
   },
 
   data() {
     return {
-      taskCounter: this.tasksLength,
-      taskText: '',
       addFlag: true
     }
   },
 
-  methods: {
-    addNewTask(){
-      this.taskCounter++
+  computed:{
+    changeFinishText() {
+      if (this.taskCounter === 0){
+        return `You have completed all the tasks!`
+      } else {
+        return `You have only ${this.taskCounter} tasks!`
+      }
+    },
+  },
 
+  methods: {
+
+    addNewTask(){
       this.$emit('addNewFolder')
     },
   }
 }
+
 </script>
 
 <style scoped>

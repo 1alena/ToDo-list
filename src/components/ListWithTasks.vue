@@ -1,15 +1,19 @@
 <template>
   <div class="list">
-    <ul id="list">
+    <ul>
       <li v-for="(task, index) in tasks" :key="index">
         <div>
-          <input type="checkbox" id="checkbox">
-          <label for="checkbox">{{ task.message }}</label>
+          <input type="checkbox" id="checkbox" v-model="task.checkboxStatus">
+          <label for="checkbox" v-if="task.editFlag===false" :class="{ completedTask: task.checkboxStatus }">{{ task.message }}</label>
+          <input type="text" class="input" v-else v-model="task.message" @keypress.enter="task.editFlag = false">
         </div>
         <!--<input v-else @keypress.enter="task.addFlag = false" type="text" placeholder="Your task" v-model="task.message">-->
         <div>
-          <button v-on:click="editTask">
-            <img src="../assets/edit.png" alt="edit" >
+          <button v-on:click="task.editFlag = true" v-if="task.editFlag===false">
+            <img src="../assets/edit2.png" alt="edit" >
+          </button>
+          <button v-on:click="task.editFlag = false" v-if="task.editFlag===true">
+            <img src="../assets/tick.png" alt="tick" >
           </button>
           <button v-on:click="deleteTask">
             <img src="../assets/cross.png" alt="delete">
@@ -20,7 +24,7 @@
     <div v-show="!addFlag">
       <theInput @taskText="taskText" @keypress.enter="taskText" class="input"/>
     </div>
-    <theFooter :tasksLength = 'tasks.length' @addNewFolder="addNewFolder"/>
+    <theFooter :taskCounter="taskCounter" @addNewFolder="addNewFolder"/>
   </div>
 </template>
 
@@ -39,32 +43,46 @@ export default {
   data() {
     return {
       tasks: [
-        {message: 'Go for a walk'},
-        {message: 'Buy flowers for my mom'},
-        {message: 'Buy cheese'},
-        {message: 'Pick up documents'},
-        {message: 'Wash the dishes'}
+        {message: 'Go for a walk', editFlag: false, checkboxStatus: false},
+        {message: 'Buy flowers for my mom', editFlag: false, checkboxStatus: false},
+        {message: 'Buy cheese', editFlag: false, checkboxStatus: false},
+        {message: 'Pick up documents', editFlag: false, checkboxStatus: false},
+        {message: 'Wash the dishes', editFlag: false, checkboxStatus: false}
       ],
 
-      addFlag: true
+      addFlag: true,
+    }
+  },
+
+  computed: {
+    taskCounter() {
+      return this.tasks.length
     }
   },
 
   methods: {
-    complectedTask() {},
-
-    deleteTask() {},
-
-    editTask() {},
-
-    addNewFolder(){
-      this.addFlag = false
+    completedTask(){
 
     },
 
+    deleteTask() {
+      this.tasks.splice(-1, 1)
+      console.log(this.tasks.length)
+      this.taskCounter--
+    },
+
+    editTask() {
+      this.task.editFlag = false
+    },
+
+    addNewFolder(){
+      this.addFlag = false
+    },
+
     taskText(taskText){
-      this.tasks.push({message: taskText})
+      this.tasks.push({message: taskText, editFlag: false, checkboxStatus: false})
       this.addFlag = true
+      this.taskCounter++
     }
 
   },
@@ -83,17 +101,19 @@ export default {
   }
 
   ::-webkit-scrollbar {
-    width: 30px;/* ширина всей полосы прокрутки */
+    width: 20px;/* ширина всей полосы прокрутки */
   }
 
   ::-webkit-scrollbar-track {
-    background: orange;/* цвет зоны отслеживания */
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.9);/* цвет зоны отслеживания */
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: blue;/* цвет бегунка */
-    border-radius: 20px;/* округлось бегунка */
-    border: 3px solid orange;/* отступ вокруг бегунка */
+    //background-color: rgba(176, 196, 222);
+    background-color: rgba(176, 224, 230);/* цвет бегунка */
+    border-radius: 15px;/* округлось бегунка */
+    border: 2px solid rgba(255, 255, 255, 0.9);/* отступ вокруг бегунка */
   }
 
   li {
@@ -123,9 +143,27 @@ export default {
     width: 15px;
   }
 
+  input{
+    border-radius: 50px;
+  }
+
   input:checked{
     color: rgba(105, 120, 184);
     border-color: rgba(105, 120, 184);
+  }
+
+  .input{
+    border: white;
+    border-radius: 15px;
+  }
+
+  .input:focus-visible{
+    border: none;
+  }
+
+  .completedTask{
+    color: cadetblue;
+
   }
 
 </style>
