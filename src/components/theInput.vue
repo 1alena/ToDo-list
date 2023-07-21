@@ -38,7 +38,7 @@ export default {
 
   input{
     padding: 15px;
-    margin-left: 40px;
+    margin-left: 60px;
     width: 500px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;

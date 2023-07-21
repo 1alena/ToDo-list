@@ -51,12 +51,12 @@ export default {
   }
 
   p{
-    margin: 40px;
+    margin: 40px 60px;
   }
 
   button{
     padding: 0 15px 0 0;
-    margin: 40px;
+    margin: 40px 80px;
     display: flex;
     align-items: center;
     text-align: center;

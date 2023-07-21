@@ -119,7 +119,7 @@ export default {
   li {
     list-style: none;
     padding: 15px;
-    margin: 10px 40px 10px 0;
+    margin: 10px 60px 10px 20px;
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
 
@@ -162,7 +162,8 @@ export default {
   }
 
   .completedTask{
-    color: cadetblue;
+    color: gray;
+
 
   }
 

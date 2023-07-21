@@ -34,7 +34,7 @@ export default {
   }
 
   .box {
-    margin: 140px 300px;
+    margin: 140px 350px;
     border: 5px black;
     background-color: rgba(255, 255, 255, 0.6);
     height: 700px;
